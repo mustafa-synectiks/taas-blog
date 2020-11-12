@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
-
+const { previous, next } = data
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -55,6 +55,11 @@ const BlogIndex = ({ data, location }) => {
                   />
                 </section>
               </article>
+               {next && (
+              <Link to={next.fields.slug} rel="next">
+                {next.frontmatter.title} →
+              </Link>
+            )}
             </li>
           )
         })}
@@ -72,7 +77,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(limit: 1, sort: { fields: [frontmatter___date], order: ASC }) {
       nodes {
         excerpt
         fields {
