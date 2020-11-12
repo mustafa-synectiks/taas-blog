@@ -1,14 +1,14 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import {graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-
+import { Link } from 'gatsby-plugin-modal-routing';
+import ConditionalLayout from '../components/ConditionalLayout'
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
-const { previous, next } = data
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -27,7 +27,7 @@ const { previous, next } = data
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
-      <ol style={{ listStyle: `none` }}>
+      {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
 
@@ -55,15 +55,13 @@ const { previous, next } = data
                   />
                 </section>
               </article>
-               {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
             </li>
           )
         })}
-      </ol>
+      </ol> */}
+      		<Link to='/hello-world/' asModal>
+						Learn More
+					</Link>
     </Layout>
   )
 }

@@ -1,9 +1,11 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { Link } from 'gatsby-plugin-modal-routing';
+import ConditionalLayout from '../components/ConditionalLayout'
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -46,15 +48,15 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link to={previous.fields.slug} rel="prev" asModal>
                 ← prev
                 {/* ← {previous.frontmatter.title} */}
               </Link>
             )}
           </li>
           <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
+           {next && (
+              <Link to={next.fields.slug} rel="next" asModal>
                 next →
                 {/* {next.frontmatter.title} → */}
               </Link>
