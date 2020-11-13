@@ -32,6 +32,7 @@ const BlogPostTemplate = ({ data, location }) => {
           itemProp="articleBody"
         />
         <hr />
+        <hr />
         <footer>
           <Bio />
         </footer>
