@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './Layout';
+import Layout from './layout';
 import { Link, ModalRoutingContext } from 'gatsby-plugin-modal-routing';
 // import './nav.css'
 
