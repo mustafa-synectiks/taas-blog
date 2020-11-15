@@ -7,6 +7,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 	// Define a template for blog post
 	const blogPost = path.resolve(`./src/templates/blog-post.js`);
 	const productPost = path.resolve(`./src/templates/product-post.js`);
+	const SolutionPost = path.resolve(`./src/templates/solution-post.js`);
 
 	// Get all markdown blog posts sorted by date
 	const result = await graphql(
@@ -71,16 +72,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 			});
 		});
 	}
-	if (serviceposts.length > 0) {
-		serviceposts.forEach((p, i) => {
-			const previousPostId = i === 0 ? null : serviceposts[i - 1].id;
-			const nextPostId = i === serviceposts.length - 1 ? null : serviceposts[i + 1].id;
+	if (solutionposts.length > 0) {
+		solutionposts.forEach((s, ind) => {
+			const previousPostId = ind === 0 ? null : solutionposts[ind - 1].id;
+			const nextPostId = ind === solutionposts.length - 1 ? null : solutionposts[ind + 1].id;
 
 			createPage({
-				path: p.fields.slug,
-				component: ServicePost,
+				path: s.fields.slug,
+				component: SolutionPost,
 				context: {
-					id: p.id,
+					id: s.id,
 					previousPostId,
 					nextPostId
 				}
