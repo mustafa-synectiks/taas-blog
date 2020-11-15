@@ -72,7 +72,7 @@ const ProductPostTemplate = ({ data, location }) => {
 export default ProductPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
+  query ProductPostBySlug(
     $id: String!
     $previousPostId: String
     $nextPostId: String
