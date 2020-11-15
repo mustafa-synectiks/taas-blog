@@ -62,6 +62,9 @@ const BlogIndex = ({ data, location }) => {
       		<Link to='/hello-world/' asModal>
 						Learn More
 					</Link>
+      		<Link to='/oneservice/' asModal>
+						Learn More
+					</Link>
     </Layout>
   )
 }

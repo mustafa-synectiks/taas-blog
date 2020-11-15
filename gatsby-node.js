@@ -33,6 +33,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 	}
 
 	const posts = result.data.allMarkdownRemark.nodes;
+	const productposts = result.data.allMarkdownRemark.nodes;
 
 	// Create blog posts pages
 	// But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -54,16 +55,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 			});
 		});
 	}
-	if (posts.length > 0) {
-		posts.forEach((post, index) => {
-			const previousPostId = index === 0 ? null : posts[index - 1].id;
-			const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
+	if (productposts.length > 0) {
+		productposts.forEach((p, i) => {
+			const previousPostId = i === 0 ? null : productposts[i - 1].id;
+			const nextPostId = i === productposts.length - 1 ? null : productposts[i + 1].id;
 
 			createPage({
-				path: post.fields.slug,
+				path: p.fields.slug,
 				component: productPost,
 				context: {
-					id: post.id,
+					id: p.id,
 					previousPostId,
 					nextPostId
 				}

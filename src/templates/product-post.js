@@ -48,12 +48,12 @@ const ProductPostTemplate = ({ data, location }) => {
           }}
         >
           <li>
-            {previous && (
+            {/* {previous && (
               <Link to={previous.fields.slug} rel="prev" asModal>
                 ← prev
                 {/* ← {previous.frontmatter.title} */}
-              </Link>
-            )}
+              {/* </Link> */}
+            {/* )} */}
           </li>
           <li>
            {next && (
