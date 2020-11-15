@@ -71,6 +71,22 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 			});
 		});
 	}
+	if (serviceposts.length > 0) {
+		serviceposts.forEach((p, i) => {
+			const previousPostId = i === 0 ? null : serviceposts[i - 1].id;
+			const nextPostId = i === serviceposts.length - 1 ? null : serviceposts[i + 1].id;
+
+			createPage({
+				path: p.fields.slug,
+				component: ServicePost,
+				context: {
+					id: p.id,
+					previousPostId,
+					nextPostId
+				}
+			});
+		});
+	}
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

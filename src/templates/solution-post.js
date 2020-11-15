@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 import { Link } from 'gatsby-plugin-modal-routing';
 import ConditionalLayout from '../components/ConditionalLayout'
 
-const ProductPostTemplate = ({ data, location }) => {
+const SolutionPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -69,10 +69,10 @@ const ProductPostTemplate = ({ data, location }) => {
   )
 }
 
-export default ProductPostTemplate
+export default SolutionPostTemplate
 
 export const pageQuery = graphql`
-  query ProductPostBySlug(
+  query SolutionPostBySlug(
     $id: String!
     $previousPostId: String
     $nextPostId: String
