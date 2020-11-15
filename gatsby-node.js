@@ -7,7 +7,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 	// Define a template for blog post
 	const blogPost = path.resolve(`./src/templates/blog-post.js`);
 	const productPost = path.resolve(`./src/templates/product-post.js`);
-	const SolutionPost = path.resolve(`./src/templates/solution-post.js`);
+	const solutionPost = path.resolve(`./src/templates/solution-post.js`);
 
 	// Get all markdown blog posts sorted by date
 	const result = await graphql(
@@ -35,6 +35,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
 	const posts = result.data.allMarkdownRemark.nodes;
 	const productposts = result.data.allMarkdownRemark.nodes;
+	const solutionposts = result.data.allMarkdownRemark.nodes;
 
 	// Create blog posts pages
 	// But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -79,7 +80,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
 			createPage({
 				path: s.fields.slug,
-				component: SolutionPost,
+				component: solutionPost,
 				context: {
 					id: s.id,
 					previousPostId,
