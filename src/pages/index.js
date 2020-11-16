@@ -1,6 +1,6 @@
 import React from "react"
 import {graphql } from "gatsby"
-
+import './index.css'
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,24 +9,35 @@ import ConditionalLayout from '../components/ConditionalLayout'
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={siteTitle}>
-        <SEO title="All posts" />
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
+  // if (posts.length === 0) {
+  //   return (
+  //     <Layout location={location} >
+  //      <h1>Hi</h1>
+  //     </Layout>
+  //   )
+  // }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} >
       <SEO title="All posts" />
-      <Bio />
+
+      <div className='main-column'>
+      <div className="columns one">
+      	<Link to='/hello-world/' asModal>
+						Blog
+					</Link>
+      	</div>
+      <div className="columns two">
+      	<Link to='/products/oneservice/' asModal>
+						Products
+					</Link>
+      	</div>
+      <div className="columns three">
+      	<Link to='/oneservice/' asModal>
+						Solutions
+					</Link></div>
+      </div>
+      {/* <Bio /> */}
       {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -59,15 +70,7 @@ const BlogIndex = ({ data, location }) => {
           )
         })}
       </ol> */}
-      		<Link to='/hello-world/' asModal>
-						Learn More One
-					</Link>
-      		<Link to='/oneservice/' asModal>
-						Learn More Two
-					</Link>
-      		<Link to='/solution-one/' asModal>
-						Learn More Three
-					</Link>
+
     </Layout>
   )
 }
@@ -81,7 +84,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(limit: 1, sort: { fields: [frontmatter___date], order: ASC }) {
+    allMarkdownRemark(limit: 1, sort: { fields: [frontmatter___date], order: ASC },filter: {fileAbsolutePath: {regex: "/blog/"}}) {
       nodes {
         excerpt
         fields {

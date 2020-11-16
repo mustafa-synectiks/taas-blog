@@ -49,7 +49,8 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev" asModal>
+
+              <Link to={`/blog/${previous.fields.slug}`} rel="prev" asModal>
                 ← prev
                 {/* ← {previous.frontmatter.title} */}
               </Link>
@@ -57,7 +58,7 @@ const BlogPostTemplate = ({ data, location }) => {
           </li>
           <li>
            {next && (
-              <Link to={next.fields.slug} rel="next" asModal>
+              <Link to={`/blog/${next.fields.slug}`} rel="next" asModal>
                 next →
                 {/* {next.frontmatter.title} → */}
               </Link>
@@ -73,6 +74,7 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
+
     $id: String!
     $previousPostId: String
     $nextPostId: String
@@ -82,7 +84,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
+    markdownRemark(id: { eq: $id }, fileAbsolutePath: {regex: "/blog/"}) {
       id
       excerpt(pruneLength: 160)
       html
@@ -92,7 +94,7 @@ export const pageQuery = graphql`
         description
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
+    previous: markdownRemark(id: { eq: $previousPostId },fileAbsolutePath: {regex: "/blog/"}) {
       fields {
         slug
       }

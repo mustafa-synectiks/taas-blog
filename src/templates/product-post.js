@@ -8,15 +8,15 @@ import { Link } from 'gatsby-plugin-modal-routing';
 import ConditionalLayout from '../components/ConditionalLayout'
 
 const ProductPostTemplate = ({ data, location }) => {
-  const post = data.markdownRemark
+  const propost = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={propost.frontmatter.title}
+        description={propost.frontmatter.description || propost.excerpt}
       />
       <article
         className="blog-post"
@@ -24,11 +24,11 @@ const ProductPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <h1 itemProp="headline">{propost.frontmatter.title}</h1>
+          <p>{propost.frontmatter.date}</p>
         </header>
         <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: propost.html }}
           itemProp="articleBody"
         />
         <hr />
@@ -51,7 +51,7 @@ const ProductPostTemplate = ({ data, location }) => {
             {previous && (
               <Link to={previous.fields.slug} rel="prev" asModal>
                 ← prev
-                ← {previous.frontmatter.title}
+                {/* ← {previous.frontmatter.title} */}
               </Link>
             )}
           </li>
@@ -59,7 +59,7 @@ const ProductPostTemplate = ({ data, location }) => {
            {next && (
               <Link to={next.fields.slug} rel="next" asModal>
                 next →
-                {next.frontmatter.title} →
+                {/* {next.frontmatter.title} → */}
               </Link>
             )}
           </li>

@@ -51,7 +51,7 @@ const SolutionPostTemplate = ({ data, location }) => {
             {previous && (
               <Link to={previous.fields.slug} rel="prev" asModal>
                 ← prev
-                ← {previous.frontmatter.title}
+                {/* ← {previous.frontmatter.title} */}
               </Link>
             )}
           </li>
@@ -59,7 +59,7 @@ const SolutionPostTemplate = ({ data, location }) => {
            {next && (
               <Link to={next.fields.slug} rel="next" asModal>
                 next →
-                {next.frontmatter.title} →
+                {/* {next.frontmatter.title} → */}
               </Link>
             )}
           </li>

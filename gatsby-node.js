@@ -27,19 +27,37 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     `
 	);
+	const resultProducts = await graphql(
+		`
+      {
+        allMarkdownRemark(
+					filter: {fileAbsolutePath: {regex: "/products/"}}
+          sort: { fields: [frontmatter___date], order: ASC }
+          limit: 1000
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    `
+	);
 
 	if (result.errors) {
 		reporter.panicOnBuild(`There was an error loading your blog posts`, result.errors);
 		return;
 	}
+	if (resultProducts.errors) {
+		reporter.panicOnBuild(`There was an error loading your blog posts`, resultProducts.errors);
+		return;
+	}
 
 	const posts = result.data.allMarkdownRemark.nodes;
-	const productposts = result.data.allMarkdownRemark.nodes;
+	const productposts = resultProducts.data.allMarkdownRemark.nodes;
 	const solutionposts = result.data.allMarkdownRemark.nodes;
-
-	// Create blog posts pages
-	// But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-	// `context` is available in the template as a prop and as a variable in GraphQL
 
 	if (posts.length > 0) {
 		posts.forEach((post, index) => {
@@ -58,15 +76,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 		});
 	}
 	if (productposts.length > 0) {
-		productposts.forEach((p, i) => {
+		productposts.forEach((propost, i) => {
 			const previousPostId = i === 0 ? null : productposts[i - 1].id;
 			const nextPostId = i === productposts.length - 1 ? null : productposts[i + 1].id;
 
 			createPage({
-				path: p.fields.slug,
+				path: propost.fields.slug,
 				component: productPost,
 				context: {
-					id: p.id,
+					id: propost.id,
 					previousPostId,
 					nextPostId
 				}
