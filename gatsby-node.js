@@ -6,8 +6,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
 	// Define a template for blog post
 	const blogPost = path.resolve(`./src/templates/blog-post.js`);
-	const productPost = path.resolve(`./src/templates/product-post.js`);
-	const solutionPost = path.resolve(`./src/templates/solution-post.js`);
+	// const productPost = path.resolve(`./src/templates/product-post.js`);
+	// const solutionPost = path.resolve(`./src/templates/solution-post.js`);
 
 	// Get all markdown blog posts sorted by date
 	const result = await graphql(
@@ -50,14 +50,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 		reporter.panicOnBuild(`There was an error loading your blog posts`, result.errors);
 		return;
 	}
-	if (resultProducts.errors) {
-		reporter.panicOnBuild(`There was an error loading your blog posts`, resultProducts.errors);
-		return;
-	}
+	// if (resultProducts.errors) {
+	// 	reporter.panicOnBuild(`There was an error loading your blog posts`, resultProducts.errors);
+	// 	return;
+	// }
 
 	const posts = result.data.allMarkdownRemark.nodes;
-	const productposts = resultProducts.data.allMarkdownRemark.nodes;
-	const solutionposts = result.data.allMarkdownRemark.nodes;
+	// const productposts = resultProducts.data.allMarkdownRemark.nodes;
+	// const solutionposts = result.data.allMarkdownRemark.nodes;
 
 	if (posts.length > 0) {
 		posts.forEach((post, index) => {
@@ -75,38 +75,38 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 			});
 		});
 	}
-	if (productposts.length > 0) {
-		productposts.forEach((propost, i) => {
-			const previousPostId = i === 0 ? null : productposts[i - 1].id;
-			const nextPostId = i === productposts.length - 1 ? null : productposts[i + 1].id;
+	// if (productposts.length > 0) {
+	// 	productposts.forEach((propost, i) => {
+	// 		const previousPostId = i === 0 ? null : productposts[i - 1].id;
+	// 		const nextPostId = i === productposts.length - 1 ? null : productposts[i + 1].id;
 
-			createPage({
-				path: propost.fields.slug,
-				component: productPost,
-				context: {
-					id: propost.id,
-					previousPostId,
-					nextPostId
-				}
-			});
-		});
-	}
-	if (solutionposts.length > 0) {
-		solutionposts.forEach((s, ind) => {
-			const previousPostId = ind === 0 ? null : solutionposts[ind - 1].id;
-			const nextPostId = ind === solutionposts.length - 1 ? null : solutionposts[ind + 1].id;
+	// 		createPage({
+	// 			path: propost.fields.slug,
+	// 			component: productPost,
+	// 			context: {
+	// 				id: propost.id,
+	// 				previousPostId,
+	// 				nextPostId
+	// 			}
+	// 		});
+	// 	});
+	// }
+	// if (solutionposts.length > 0) {
+	// 	solutionposts.forEach((s, ind) => {
+	// 		const previousPostId = ind === 0 ? null : solutionposts[ind - 1].id;
+	// 		const nextPostId = ind === solutionposts.length - 1 ? null : solutionposts[ind + 1].id;
 
-			createPage({
-				path: s.fields.slug,
-				component: solutionPost,
-				context: {
-					id: s.id,
-					previousPostId,
-					nextPostId
-				}
-			});
-		});
-	}
+	// 		createPage({
+	// 			path: s.fields.slug,
+	// 			component: solutionPost,
+	// 			context: {
+	// 				id: s.id,
+	// 				previousPostId,
+	// 				nextPostId
+	// 			}
+	// 		});
+	// 	});
+	// }
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

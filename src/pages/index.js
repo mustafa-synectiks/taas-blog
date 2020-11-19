@@ -28,7 +28,7 @@ const BlogIndex = ({ data, location }) => {
 					</Link>
       	</div>
       <div className="columns two">
-      	<Link to='/products/oneservice/' asModal>
+      	<Link to='/oneservice/' asModal>
 						Products
 					</Link>
       	</div>

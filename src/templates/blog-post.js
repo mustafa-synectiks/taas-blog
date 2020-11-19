@@ -50,7 +50,7 @@ const BlogPostTemplate = ({ data, location }) => {
           <li>
             {previous && (
 
-              <Link to={`/blog/${previous.fields.slug}`} rel="prev" asModal>
+              <Link to={previous.fields.slug} rel="prev" asModal>
                 ← prev
                 {/* ← {previous.frontmatter.title} */}
               </Link>
@@ -58,7 +58,7 @@ const BlogPostTemplate = ({ data, location }) => {
           </li>
           <li>
            {next && (
-              <Link to={`/blog/${next.fields.slug}`} rel="next" asModal>
+              <Link to={next.fields.slug} rel="next" asModal>
                 next →
                 {/* {next.frontmatter.title} → */}
               </Link>
